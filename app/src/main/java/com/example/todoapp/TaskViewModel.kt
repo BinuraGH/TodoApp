@@ -1,5 +1,7 @@
 package com.example.todoapp
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,6 +26,7 @@ class TaskViewModel(private val repository: TaskItemRepository) : ViewModel(){
     fun deleteTaskItem(newTask: TaskItem) = viewModelScope.launch {
         repository.deleteTaskItem(newTask)
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     fun setCompleted(taskItem: TaskItem)= viewModelScope.launch {
         if(!taskItem.isCompleted())
             taskItem.completeDateString = TaskItem.dateFormatter.format(LocalDate.now())
