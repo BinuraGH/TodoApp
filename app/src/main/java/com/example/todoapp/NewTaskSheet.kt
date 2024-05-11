@@ -1,11 +1,13 @@
 package com.example.todoapp
 
 import android.app.TimePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.databinding.FragmentNewTaskSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -17,6 +19,7 @@ class NewTaskSheet(var taskItem:TaskItem?) : BottomSheetDialogFragment() {
     private  lateinit var taskViewModel: TaskViewModel
     private var dueTime:LocalTime? = null
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = requireActivity()
@@ -46,6 +49,7 @@ class NewTaskSheet(var taskItem:TaskItem?) : BottomSheetDialogFragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun openTimePicker() {
         if(dueTime==null)
             dueTime = LocalTime.now()
@@ -72,6 +76,7 @@ class NewTaskSheet(var taskItem:TaskItem?) : BottomSheetDialogFragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private  fun saveAction(){
         val name = binding.name.text.toString()
         val desc = binding.desc.text.toString()
