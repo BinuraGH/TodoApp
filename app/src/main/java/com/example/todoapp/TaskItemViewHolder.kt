@@ -3,6 +3,7 @@ package com.example.todoapp
 import android.content.Context
 import android.graphics.Paint
 import android.os.Binder
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.databinding.FragmentNewTaskSheetBinding
 import com.example.todoapp.databinding.TaskItemCellBinding
@@ -34,9 +35,14 @@ class TaskItemViewHolder(
         binding.taskCellContainer.setOnClickListener{
             clickListener.editTaskItem(taskItem)
         }
+        binding.deleteBtn.setOnClickListener{
+            clickListener.deleteTaskItem(taskItem)
+            Toast.makeText(context, "Task Deleted", Toast.LENGTH_SHORT).show()
 
-        if(taskItem.dueTime != null)
-            binding.dueTime.text = timeFormat.format(taskItem.dueTime)
+        }
+
+        if(taskItem.dueTime() != null)
+            binding.dueTime.text = timeFormat.format(taskItem.dueTime())
         else
             binding.dueTime.text = " "
     }
